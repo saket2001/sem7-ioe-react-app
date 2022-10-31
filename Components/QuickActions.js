@@ -10,6 +10,7 @@ import {
 import { makeFetchRequest } from "../utils/fetchUtil";
 import { useSelector } from "react-redux";
 import { Loader } from "./Loader";
+import environment from "../environment";
 
 export const QuickActions = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +21,7 @@ export const QuickActions = () => {
       setIsLoading(true);
       const body = {
         owner_id: owner_id,
-        amountGiven: "100g",
+        amountGiven: "100gm",
         date: new Date().toDateString(),
         time: new Date().toLocaleTimeString(),
         type_of_action: "Fed by owner",
@@ -28,7 +29,7 @@ export const QuickActions = () => {
         food_type: "dry",
       };
       const response = await makeFetchRequest(
-        "http://192.168.0.105:5000/api/v1/feed-pet",
+        `${environment.API_URL}/feed-pet`,
         {
           method: "POST",
           body: JSON.stringify(body),

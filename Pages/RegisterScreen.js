@@ -8,6 +8,7 @@ import {
   Pressable,
 } from "react-native";
 import { Loader } from "../Components/Loader";
+import environment from "../environment";
 import { makeFetchRequest } from "../utils/fetchUtil";
 
 export const RegisterScreen = ({ navigation }) => {
@@ -39,7 +40,7 @@ export const RegisterScreen = ({ navigation }) => {
       };
       if (!BodyData) return alert("Form fields cannot by empty!");
       const data = await makeFetchRequest(
-        "http://192.168.36.189:5000/api/v1/owner-sign-up",
+        `${environment.API_URL}/owner-sign-up`,
         {
           method: "POST",
           body: JSON.stringify(BodyData),

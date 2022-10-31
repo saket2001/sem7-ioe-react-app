@@ -13,6 +13,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import { DatePicker } from "../Components/DatePicker";
 import { useDispatch, useSelector } from "react-redux";
 import { ownerActions } from "../Store/ownerSlice";
+import environment from "../environment";
 
 const feedAmount = ["50", "100", "150", "200"];
 
@@ -37,7 +38,7 @@ export const FeedScreen = ({ navigation }) => {
     const getStoredSettings = async () => {
       try {
         const response = await makeFetchRequest(
-          `http://192.168.0.105:5000/api/v1/get-auto-feed/${owner_id}`
+          `${environment.API_URL}/get-auto-feed/${owner_id}`
         );
 
         // console.log(response?.data[0]);

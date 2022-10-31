@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text,Image } from "react-native";
 import { makeFetchRequest } from "../utils/fetchUtil";
 import { useSelector } from "react-redux";
+import environment from "../environment";
 
 export const Header = () => {
   const [ownerData, setOwnerData] = useState({});
@@ -11,7 +12,7 @@ export const Header = () => {
     const getOwnerDetail = async () => {
       try {
         const data = await makeFetchRequest(
-          `http://192.168.0.105:5000/api/v1/get-details/${owner_id}`
+          `${environment.API_URL}/get-details/${owner_id}`
         );
 
         if (data && !data?.isError) setOwnerData(data);

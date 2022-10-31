@@ -9,7 +9,7 @@ import environment from "./environment";
 export const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const owner_data = useSelector((state) => state?.auth?.ownerData);
-  console.log(owner_data.owner_id);
+  console.log(owner_data?.owner_id);
 
   useEffect(() => {
     // function for detecting any motion of pet new feeder
@@ -18,7 +18,7 @@ export const App = () => {
         const data = await makeFetchRequest(`${environment.API_URL}/check-motion`);
 
         if (!data?.isError && data?.data && data?.data === "Motion Detected") {
-          console.log(data);
+          // console.log(data);
           // alert user via notification
           // alert("It looks like your pet wants food, \nDo you want to feed him?")
           Alert.alert(
@@ -53,7 +53,7 @@ export const App = () => {
                     }
                   );
 
-                  console.log(response);
+                  // console.log(response);
                   setIsLoading(false);
                   if (response && !response?.isError) {
                     Alert.alert("Hello Owner!", response?.message, [
@@ -87,7 +87,7 @@ export const App = () => {
             food_type: "dry",
           };
           const response = await makeFetchRequest(
-            "http://192.168.0.105:5000/api/v1/feed-pet",
+            `${environment.API_URL}/feed-pet`,
             {
               method: "POST",
               body: JSON.stringify(body),
@@ -107,9 +107,9 @@ export const App = () => {
       }
     };
 
-    setInterval(async () => {
-      checkForMotion();
-    }, 5000);
+    // setInterval(async () => {
+    //   checkForMotion();
+    // }, 5000);
 
     setInterval(async () => {
       // checkForMotion();

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { Loader } from "../Components/Loader";
+import environment from "../environment";
 import { ownerActions } from "../Store/ownerSlice";
 // import { NavigationHeader } from "../Components/NavigationHeader";
 import { makeFetchRequest } from "../utils/fetchUtil";
@@ -38,8 +39,7 @@ export const LoginScreen = ({ navigation }) => {
       };
       if (!BodyData) return alert("Form fields cannot by empty!");
       const data = await makeFetchRequest(
-        // `${process.env.REACT_APP_API_PORT}/owner-sign-in`,
-        `http://192.168.0.105:5000/api/v1/owner-sign-in`,
+        `${environment.API_URL}/owner-sign-in`,
         {
           method: "POST",
           body: JSON.stringify(BodyData),
@@ -72,15 +72,12 @@ export const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        {/* header component  */}
-        {/* <NavigationHeader /> */}
         {/* header */}
         <View style={styles.header_col}>
           <Text style={styles.header_h1}>Hello</Text>
-          <Text style={styles.header_h1}>Welcome Back</Text>
+          <Text style={styles.header_h1}>Welcome Back User</Text>
           <Text style={styles.header_p}>
-            Great Seeing you back! Enter your details to quickly getting back to
-            awesomeness
+            Great Seeing you back! Enter your details to sign in to your account.
           </Text>
         </View>
         {/* form */}

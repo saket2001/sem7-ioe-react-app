@@ -15,8 +15,9 @@ export const DatePicker = ({ onUpdate, mode ='time'}) => {
   };
 
   const handleConfirm = (date) => {
-    // console.log("A date has been picked: ", date.toLocaleTimeString());
-    onUpdate(date.toLocaleTimeString());
+    let val = '';
+    val = mode === "date" ? date : date.toLocaleTimeString();
+    onUpdate(val);
     hideDatePicker();
   };
 

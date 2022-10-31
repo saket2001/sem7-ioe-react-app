@@ -11,6 +11,7 @@ import { makeFetchRequest } from "../utils/fetchUtil";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useDispatch, useSelector } from "react-redux";
 import { ownerActions } from "../Store/ownerSlice";
+import environment from "../environment";
 
 export const ProfileScreen = ({ navigation }) => {
   const [ownerData, setOwnerData] = useState(null);
@@ -21,7 +22,7 @@ export const ProfileScreen = ({ navigation }) => {
     const getOwnerDetail = async () => {
       try {
         const data = await makeFetchRequest(
-          `http://192.168.0.105:5000/api/v1/get-details/${owner_id}`
+          `${environment.API_URL}/get-details/${owner_id}`
         );
 
         if (!data) return setOwnerData(null);

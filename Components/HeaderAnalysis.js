@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { makeFetchRequest } from "../utils/fetchUtil";
 import { useSelector } from "react-redux";
 import { Loader } from "./Loader";
+import environment from "../environment";
 
 export const HeaderAnalysis = () => {
   const { owner_id } = useSelector((state) => state?.auth?.ownerData);
@@ -15,7 +16,7 @@ export const HeaderAnalysis = () => {
       try {
         setIsLoading(true);
         const response = await makeFetchRequest(
-          `http://192.168.0.105:5000/api/v1/pet-analysis/${owner_id}/${new Date().toDateString()}`
+          `${environment.API_URL}/pet-analysis/${owner_id}/${new Date().toDateString()}`
         );
 
         setIsLoading(false);

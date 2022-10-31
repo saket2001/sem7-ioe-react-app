@@ -5,6 +5,7 @@ import { makeFetchRequest } from "../utils/fetchUtil";
 import { DatePicker } from "./DatePicker";
 import { useSelector } from "react-redux";
 import { Loader } from "./Loader";
+import environment from "../environment";
 
 export const RecordList = ({
   showTopBar = true,
@@ -28,7 +29,7 @@ export const RecordList = ({
           ? new Date(filterVal).toDateString()
           : new Date().toDateString();
         const data = await makeFetchRequest(
-          `http://192.168.0.105:5000/api/v1/get-feeding-details-by-date/${owner_id}/${date}`
+          `${environment.API_URL}/get-feeding-details-by-date/${owner_id}/${date}`
         );
 
         setIsLoading(false);
@@ -90,13 +91,17 @@ export const RecordList = ({
           <View style={styles.filterBtn}>
             <DatePicker
               mode="date"
-              onUpdate={(date) => setFilterVal(new Date(date).toDateString())}
+              onUpdate={(date) => {
+                setFilterVal(new Date(date).toDateString())
+              }}
             />
           </View>
         </View>
       )}
       {recordData?.length === 0 && (
-        <Text style={styles.h1}>Not Records found</Text>
+        <View style={{alignItems:'center'}}>
+          <Text style={styles.p}>Not Records found for today's date</Text>
+        </View>
       )}
       {ShowAll
         ? recordData?.map((d) => <RecordItem data={d} key={d?._id} />)
